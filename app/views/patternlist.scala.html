@@ -1,0 +1,7 @@
+@(patternlist: List[Patterns])
+<ul>
+	@for(Patterns <- patternlist){
+		<li><a href="@Patterns.URL">@Patterns.name</a></li>
+	}
+</ul>
+	
