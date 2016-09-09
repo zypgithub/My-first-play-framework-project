@@ -1,0 +1,9 @@
+@(message: String)(patternlist: List[Patterns])
+
+@main("Welcome") {
+
+    @*@play20.welcome(message, style = "Java")*@
+    <h1> Welcome, the appliaction is running</h1>
+}{
+	@patternsidebar(patternlist);	
+}
