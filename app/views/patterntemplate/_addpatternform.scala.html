@@ -1,0 +1,9 @@
+@import helper._
+@(patternform: Form[Patterns])
+<form action="@pattern.routes.ManagePatterns.addPost()" method="POST">
+	@CSRF.formField
+	@helper.inputText(patternform("name"))
+	</br>
+	<input type="submit"/>
+</form>
+

@@ -1,0 +1,14 @@
+@import helper._
+
+@(form: Form[User])
+<div id="loginform">
+	<form role="form">
+	<div class="form-group">
+	<label class="username" for="username">Username/Email</label><input class="form-control" placeholder="Email or Username" id="username"/> 
+	</div>
+	<div class="form-group">
+	<label class="passwd" for="passwd">Password:</label><input class="form-control" placeholder="Password" class="passwd" id="passwd" type="password"/>
+	</div>
+	<button type="submit" class="btn btn-default">Submit</button>	
+	</form>
+</div>

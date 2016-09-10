@@ -1,0 +1,7 @@
+@(patternlist: List[Patterns])(form: Form[Patterns])
+
+@common.main("Add pattern"){
+	@_addpatternform(form)
+}{
+	@patternsidebar(patternlist)
+}

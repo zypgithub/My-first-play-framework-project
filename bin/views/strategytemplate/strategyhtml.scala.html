@@ -1,0 +1,13 @@
+@(patternlist: List[Patterns])
+@import helper._
+@common.main("Strategy pattern"){
+	<h1> Hello, you are in the strategy pattern</h1>
+	<h1> Please input your strategy </h1>
+<form action = "@strategy.routes.Strategy.submitStrategyPOST()" method = "POST"> 
+		@CSRF.formField
+		<input name="strategynum"/>
+		<input type="submit">
+</form> 
+}{
+	@patterntemplate.patternsidebar(patternlist)
+}

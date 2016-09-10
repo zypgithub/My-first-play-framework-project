@@ -1,0 +1,6 @@
+@(patternls: List[Patterns])
+@common.sidebar{
+	<a href="@pattern.routes.ManagePatterns.addForm()"> Add a pattern </a> 
+}{
+	@patternlist(patternls)
+}

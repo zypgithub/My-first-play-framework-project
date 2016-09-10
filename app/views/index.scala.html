@@ -1,9 +1,9 @@
 @(message: String)(patternlist: List[Patterns])
 
-@main("Welcome") {
+@common.main("Welcome") {
 
     @*@play20.welcome(message, style = "Java")*@
-    <h1> Welcome, the appliaction is running</h1>
+    <h1>@message</h1>
 }{
-	@patternsidebar(patternlist);	
+	@patterntemplate.patternsidebar(patternlist)
 }

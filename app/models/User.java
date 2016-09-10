@@ -13,7 +13,7 @@ public class User extends Model{
 	@Id
 	public long id;
 	@Required
-	public String userName;
+	public String username;
 	@Required
 	public String password;
 	@Email

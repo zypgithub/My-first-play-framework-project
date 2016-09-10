@@ -1,0 +1,6 @@
+@(patternlist: List[Patterns])(form: Form[User])
+@common.main("Login"){
+	@authtemplate._loginform(form)
+}{
+	@patterntemplate.patternsidebar(patternlist)
+}
