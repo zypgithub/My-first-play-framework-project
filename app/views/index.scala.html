@@ -1,4 +1,4 @@
-@(message: String)(patternlist: List[Patterns])
+@(message: String)(patternlist: List[Patterns])(user: User = null)
 
 @common.main("Welcome") {
 
@@ -6,4 +6,4 @@
     <h1>@message</h1>
 }{
 	@patterntemplate.patternsidebar(patternlist)
-}
+}(user)

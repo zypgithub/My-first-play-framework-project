@@ -9,6 +9,7 @@ package controllers.strategy;
 import java.io.*;
 import java.util.*;
 
+import annotating.MyAuth;
 import play.*;
 import play.api.mvc.RequestHeader;
 import play.cache.Cache;
@@ -28,27 +29,36 @@ public class Strategy extends Controller
 {
 	StrategyInt strategy;
 	@AddCSRFToken
+	@With(MyAuth.class)
 	public static Result myresponse()
 	{
-		return ok(strategyhtml.render((List<Patterns>)Cache.get("patterns")));
+		User user = (User) ctx().args.get("user");
+		return ok(strategyhtml.render((List<Patterns>)Cache.get("patterns"), user));
 		
 	}
+	
+	@With(MyAuth.class)
 	public static Result submitStrategyGET(int num)
 	{
 		Strategy stra = new Strategy();
 		stra.SetInterface(num);
 		String str = stra.doit();
-		return ok(strategyres.render(str.toString(), (List<Patterns>)Cache.get("patterns")));
+		User user = (User) ctx().args.get("user");
+		return ok(strategyres.render(str.toString(), (List<Patterns>)Cache.get("patterns"), user));
 	}
+	
 	@RequireCSRFCheck
+	@With(MyAuth.class)
 	public static Result submitStrategyPOST()
     {
         int num; 
+		User user = (User) ctx().args.get("user");
         DynamicForm requestdata = Form.form().bindFromRequest(); 
         num = Integer.parseInt(requestdata.get("strategynum"));
         return submitStrategyGET(num);
         	
 	}
+	
     public void SetInterface(int num)
     {
     	this.strategy = new StrategyFactory(num).myinterface;

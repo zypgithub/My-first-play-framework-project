@@ -1,13 +1,14 @@
 @import helper._
-
-@(form: Form[User])
+@(form: Form[User])(info: String)
 <div id="loginform">
-	<form role="form">
+	<form role="form" action="@userauth.routes.UserAuth.login()" method="POST">
+	@CSRF.formField
+	<h2>@info</h2>
 	<div class="form-group">
-	<label class="username" for="username">Username/Email</label><input class="form-control" placeholder="Email or Username" id="username"/> 
+	<label class="username" for="username">Username/Email</label><input class="form-control" name="username" placeholder="Email or Username" id="username"/> 
 	</div>
 	<div class="form-group">
-	<label class="passwd" for="passwd">Password:</label><input class="form-control" placeholder="Password" class="passwd" id="passwd" type="password"/>
+	<label class="passwd" for="passwd">Password:</label><input class="form-control" name="password" placeholder="Password" class="passwd" id="passwd" type="password"/>
 	</div>
 	<button type="submit" class="btn btn-default">Submit</button>	
 	</form>

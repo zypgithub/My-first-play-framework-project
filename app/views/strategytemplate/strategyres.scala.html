@@ -1,8 +1,8 @@
-@(message: String)(patternlist: List[Patterns])
+@(message: String)(patternlist: List[Patterns])(user: User = null)
 
 @common.main("Strategy pattern"){
     <h1>hi, here is your selected Strategy </h1>
 	<h1> @message </h1>
 }{
 	@patterntemplate.patternsidebar(patternlist)	
-}
+}(user)
