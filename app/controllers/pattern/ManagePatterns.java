@@ -1,5 +1,7 @@
 package controllers.pattern;
 
+import annotating.MyAuth;
+
 import play.mvc.*;
 import play.cache.Cache;
 import play.data.DynamicForm;
@@ -16,11 +18,13 @@ import views.html.patterntemplate.*;
 
 public class ManagePatterns extends Controller{
 	
+	@With(MyAuth.class)
 	@AddCSRFToken
 	public static Result addForm()
 	{
 		Form<Patterns> form = Form.form(Patterns.class);
-		return ok(addpattern.render((List<Patterns>)Cache.get("patterns"), form));
+		User user = (User)ctx().args.get("ID");
+		return ok(addpattern.render((List<Patterns>)Cache.get("patterns"), form, user));
 	}
 	
 	@RequireCSRFCheck

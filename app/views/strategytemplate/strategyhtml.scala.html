@@ -1,4 +1,4 @@
-@(patternlist: List[Patterns])
+@(patternlist: List[Patterns])(user: User = null)
 @import helper._
 @common.main("Strategy pattern"){
 	<h1> Hello, you are in the strategy pattern</h1>
@@ -10,4 +10,4 @@
 </form> 
 }{
 	@patterntemplate.patternsidebar(patternlist)
-}
+}(user)

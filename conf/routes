@@ -24,3 +24,5 @@ POST	/login						controllers.userauth.UserAuth.login()
 
 GET		/register					controllers.userauth.UserAuth.regGET()
 POST	/register					controllers.userauth.UserAuth.register()
+
+GET		/logout						controllers.userauth.UserAuth.logout()

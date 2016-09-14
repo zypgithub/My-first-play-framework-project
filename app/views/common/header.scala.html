@@ -1,0 +1,12 @@
+@(user: User)
+@if(user == null){
+	<div id="unauthed" class="headerright">
+		<a href="@userauth.routes.UserAuth.loginGET()">Login</a> | 
+		<a href="@userauth.routes.UserAuth.regGET()">Register</a>
+	</div>
+}else{
+	<div id="authed" class="headerright">
+		Hello, welcome @user.username | 
+		<a href="@userauth.routes.UserAuth.logout()">Logout</a>
+	</div>
+}
