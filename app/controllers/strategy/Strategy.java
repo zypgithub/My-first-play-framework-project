@@ -32,7 +32,7 @@ public class Strategy extends Controller
 	@With(MyAuth.class)
 	public static Result myresponse()
 	{
-		User user = (User) ctx().args.get("ID");
+		User user = (User) ctx().args.get("user");
 		return ok(strategyhtml.render((List<Patterns>)Cache.get("patterns"), user));
 		
 	}
@@ -43,7 +43,7 @@ public class Strategy extends Controller
 		Strategy stra = new Strategy();
 		stra.SetInterface(num);
 		String str = stra.doit();
-		User user = (User) ctx().args.get("ID");
+		User user = (User) ctx().args.get("user");
 		return ok(strategyres.render(str.toString(), (List<Patterns>)Cache.get("patterns"), user));
 	}
 	
@@ -52,7 +52,7 @@ public class Strategy extends Controller
 	public static Result submitStrategyPOST()
     {
         int num; 
-		User user = (User) ctx().args.get("ID");
+		User user = (User) ctx().args.get("user");
         DynamicForm requestdata = Form.form().bindFromRequest(); 
         num = Integer.parseInt(requestdata.get("strategynum"));
         return submitStrategyGET(num);

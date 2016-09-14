@@ -1,8 +1,11 @@
 @(user: User)
+<div id="homelogo">
+	<a href="@routes.Application.index()">Home</a>
+</div>
 @if(user == null){
 	<div id="unauthed" class="headerright">
-		<a href="@userauth.routes.UserAuth.loginGET()">Login</a> | 
-		<a href="@userauth.routes.UserAuth.regGET()">Register</a>
+		<a href="@userauth.routes.UserAuth.loginGET()"><button type="button" class="btn btn-primary">Login</button></a>
+		<a href="@userauth.routes.UserAuth.regGET()"><button type="button" class="btn btn-info">Register</button></a>
 	</div>
 }else{
 	<div id="authed" class="headerright">

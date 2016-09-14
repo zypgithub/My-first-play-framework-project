@@ -16,10 +16,12 @@ public class User extends Model{
 	@Id
 	public long id;
 	@Required
+	@Column(unique = true)
 	public String username;
 	@Required
 	public String password;
 	@Email
+	@Column(unique = true)
 	public String email;
 	
 	public static Finder<Integer, User> find = 

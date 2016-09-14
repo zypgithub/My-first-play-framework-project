@@ -15,6 +15,20 @@
 }
 #header
 {
-	height:50px;
+	height:54px;
+	padding:10px;
 	background-color:black;
+}
+.headerright
+{
+	float:right;
+}
+#authed
+{
+	color:white;
+}
+#homelogo
+{
+	float:left;
+	font-size:24px;
 }

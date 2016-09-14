@@ -9,6 +9,9 @@ import play.filters.csrf.*;
 
 import java.util.List;
 
+import javax.persistence.PersistenceException;
+import javax.validation.ConstraintViolationException;
+
 import annotating.MyAuth;
 import models.*;
 import views.html.index;
@@ -23,8 +26,11 @@ public class UserAuth extends Controller{
 	public static Result loginGET()
 	{
 		Form<User> form = Form.form(User.class);
-		User user = (User) ctx().args.get("ID");
-		return ok(loginpage.render((List<Patterns>)Cache.get("patterns"), form, user, null));
+		User user = (User) ctx().args.get("user");
+		if(user == null)
+			return ok(loginpage.render((List<Patterns>)Cache.get("patterns"), form, null, null));
+		else
+			return ok(index.render("Welcome, you have logged in", (List<Patterns>)Cache.get("patterns"), user));	
 	}
 	
 	@RequireCSRFCheck
@@ -41,7 +47,7 @@ public class UserAuth extends Controller{
 		session().clear();
 		session("ID", String.valueOf(user.id));
 		Cache.set(String.valueOf(user.id), user);
-		return ok(index.render("Welcome, your application is running now", (List<Patterns>)Cache.get("patterns"), null));	
+		return ok(index.render("Welcome," + user.username, (List<Patterns>)Cache.get("patterns"), user));	
 	}
 	
 	@AddCSRFToken
@@ -70,9 +76,15 @@ public class UserAuth extends Controller{
 			return ok(registerpage.render((List<Patterns>)Cache.get("patterns"), form, null, form.errors().toString()));
 		}
 		user.password = BCrypt.hashpw(user.password, BCrypt.gensalt());
-		user.save();
+		try
+		{
+			user.save();
+		}catch(PersistenceException e)
+		{
+			return badRequest(registerpage.render((List<Patterns>)Cache.get("patterns"), form, null, e.toString()));
+		}
 		//return ok(registerpage.render((List<Patterns>)Cache.get("patterns"), form, null, null));
-        return ok(index.render("Welcome, your application is running now", (List<Patterns>)Cache.get("patterns"), null));
+        return ok(index.render("Congratulations! You have registered your account:" + user.username, (List<Patterns>)Cache.get("patterns"), null));
 	}
 	@With(MyAuth.class)
 	public static Result logout()
@@ -80,6 +92,5 @@ public class UserAuth extends Controller{
 		String id = session("ID");
 		Cache.remove(id);
 		session().clear();
-		return ok();
-	}
+		return ok(index.render("You have logged out", (List<Patterns>)Cache.get("patterns"), null));	}
 }
